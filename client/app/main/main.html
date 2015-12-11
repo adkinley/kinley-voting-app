@@ -1,0 +1,69 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<header class="hero-unit" id="banner">
+  <div class="container" ng-hide="isLoggedIn()">
+    <h1>VotePlex</h1>
+    <p class="lead">Create custom polls with live results</p>
+    <a href="/signup"><button class="btn btn-lg btn-signup" >Sign Up</button></a>
+  </div>
+   <div class="container" ng-show="isLoggedIn()">
+    <h1>Dashboard</h1>
+    <p class="lead">What would you like to do today?</p>
+    <button class="btn btn-lg btn-signup" ng-click="showCreatePolls()">New Poll</button>
+    <button class="btn btn-lg btn-primary" ng-click="showUserPolls()">My Polls</button>
+
+  </div>
+</header>
+
+<div class="container topgap" ng-show="isLoggedIn()">
+<div ng-show="createNewPoll">
+<center>
+  <poll thevalue="Derek"></poll>
+</center>
+</div>
+<div ng-show="listUserPolls">
+  <mypolls></mypolls>
+</div>
+</div>
+<div class="container topgap" ng-hide="isLoggedIn()">
+  <div class="row">
+    <div class="col-lg-4">
+     <div class="panel">
+      <center><img class="img img-sm img-sizer" src="assets/images/bolt.png"></img>
+      <h3>Live Results</h3>
+      <p>
+        Live graphs show your poll results immediately in an easy to understand format. One graph will not provide the whole picture, that's why we provide multiple graph types to better decribe your results</p></center>
+    </div>
+    </div>
+    <div class="col-lg-4">
+     <div class="panel">
+      <center><img class="img img-sm img-sizer" src="assets/images/earth.png"></img>
+     
+      <h3>Works Everywhere</h3>
+    <p>Traditional desktop computers now represent only 30% of internet traffic. Your poll must work on the tablets, smart phones, netbooks and notebooks that your visitors are using. Our responsive designs do just that.</p>
+    </center>
+    </div>
+     
+    </div>
+    <div class="col-lg-4">
+     <div class="panel">
+      <center><img class="img img-sm image-sizer" src="assets/images/facebook.png"></img>
+      
+      <h3>Social Integration</h3>
+      <p>
+          Free integrated facebook or traditional comments allow your poll voters to provide immediate feedback and discuss results. Social share buttons encourage your poll voters to help spread the word.
+      </p>
+</center>
+    </div>
+     
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+      <p>FreeCodeCamp Basejump
+        <a href="https://twitter.com/adkinley">@adkinley</a> 
+        </p>
+  </div>
+</footer>

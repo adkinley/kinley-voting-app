@@ -1,0 +1,57 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<header class="hero-unit" id="banner">
+ 
+</header>
+<div class="container topgap">
+ <div ng-show="isAsking">
+  <div class="row">
+    <div class="col-md-4">
+     <div class="panel">
+      <h3>{{title}}</h3>
+      by {{user}}
+    </div>
+  </div>
+    <div class="col-md-4">
+     <div class="panel">
+      <form>
+      <table  class="table table-bordered"  ng-repeat="choice in list">
+         <tr>
+        <td>
+          <label>
+          <input style="margin-right:50px;" name="name" type="radio" ng-model="$parent.radioValue" value="{{choice.itemName}}" required/>{{choice.itemName}}</label></td>
+        </tr>
+      </table>
+      <input type="submit" ng-click="vote()" ng-disabled="!radioValue"></>
+    </form>
+
+    </div>
+  </div>
+</div>
+</div>
+
+<div ng-show="showGraph">
+  <div class="row">
+<div class="col-md-4">
+<div class="panel">
+  <h3>Results of: {{title}}</h3>
+  
+</div>
+</div>
+<div class ="col-md-4">
+ 
+<canvas style="width:200px;" id="bar" class="chart chart-bar" chart-data="data"
+  chart-labels="labels">
+</canvas> 
+</div></div>
+
+  </div>
+
+</div>
+<footer class="footer">
+  <div class="container">
+      <p>FreeCodeCamp Basejump
+        <a href="https://twitter.com/adkinley">@adkinley</a> 
+        </p>
+  </div>
+</footer>

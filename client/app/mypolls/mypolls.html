@@ -1,0 +1,33 @@
+<div ng-controller='MyPollsCtrl'>
+
+
+<div style="text-align:center;" ng-hide="showGraph">
+<h2>Polls of {{user}}</h2>
+<center>
+<table class="table table-bordered" style="width:50%" >
+
+	<tr ng-repeat="poll in list">
+		<td style="border-right:none;" ng-click="loadPoll(poll.name)"><div class="text-left">{{poll.name}}</div></td>
+		<td style="border-left:none;"><div class="text-right"><i ng-click="delete(poll._id)" class="fa fa-trash-o "></i></div></td>
+	
+</tr>
+
+</table>
+</center>
+</div>
+<div class="container" ng-show="showGraph">
+<div class="row">
+<div class="col-md-4">
+<div class="panel">
+	<h3>Results of: {{name}}</h3>
+</div>
+</div>
+<div class ="col-md-4">
+
+<canvas style="width:200px;" id="bar" class="chart chart-bar" chart-data="data"
+  chart-labels="labels">
+</canvas> 
+</div></div>
+</div>
+
+</div>

@@ -1,0 +1,24 @@
+
+
+<div class="panel" ng-controller="PollCtrl" width="300px">
+<div ng-show="isMakingPoll">
+<h2>New Poll</h2>
+<form type="submit" class="form-group">
+	<h4>Name your poll</h4><br>
+	<input class="input-design" type="text" placeholder="What is your favorite brand?" ng-model=question></input><br>
+	<h4>Options</h4>
+	<div ng-repeat="choice in values">
+	<input class="input-design" ng-model=choice.name type="text" placeholder={{choice.placeholder}}></input><br>
+
+	</div>
+	<br>
+
+	<button class="btn btn-secondary" style="width:20%;margin-top:20px" ng-click="addOption()">More Options</button><br>
+	<button class="btn btn-success" style="width:20%;" ng-click = "submit()" ng-disabled="invalid()" >Submit</button>
+</form>
+</div>
+<div ng-show="isPollLink">
+	Use this link to try out your poll.<p>
+
+<a ng-href={{link}}>{{link}}</a>
+	</div>

@@ -1,6 +1,7 @@
 'use strict';
 //,['chart.js']
-angular.module('kinleyVotingappApp').controller('PollCtrl', function ($scope, $http,$attrs,  Auth) {
+angular.module('kinleyVotingappApp').controller('PollCtrl', function ($scope, $http,$attrs,  Auth,$location) {
+
 
   $scope.value = $attrs.thevalue;
   $scope.value = "Joe;"
@@ -38,13 +39,13 @@ $scope.submit = function() {
 		itemList.push({itemName:$scope.values[i].name, votes:0});
   $scope.question = $scope.question.replace("?","");
 
-	var polling ={name:$scope.question, user:$scope.user, items:itemList}; 
+	var polling ={name:$scope.question, user:Auth.getCurrentUser().name, items:itemList}; 
 
 
   $http.post("/api/pollings",polling).success( function (data) {
 
-    /** THIS WONT WORK ON HEROKU. NEEDS TO BE GENERLIZED **/
-  $scope.link ="http://localhost:9000/" +$scope.user+"/"+$scope.question; 
+    /** THIS WONT WORK ON HEROKU. NEEDS TO BE GENLIZED **/
+  $scope.link =$location.protocol()+"://"+$location.host() +":"+$location.port()+"/" +Auth.getCurrentUser().name+"/"+$scope.question; 
 
   	$scope.question= '';
    		$scope.values = [{placeholder: "Coke", name:"", pos:1}, {placeholder:"Pepsi", name:"", pos:2}];

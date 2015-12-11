@@ -15,9 +15,10 @@ angular.module('kinleyVotingappApp')
     $scope.newPoll = true;
     $scope.title = $routeParams.title;
     $scope.user = $routeParams.username;
+
     $scope.list = ["One", "Two", "Three"];
     $scope.crazyValue = "Thomas";
-    
+
     $scope.showGraph = false;
     $scope.isAsking = true;
 

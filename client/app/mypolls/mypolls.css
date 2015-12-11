@@ -1,0 +1,17 @@
+.text-link {
+	cursor:pointer;
+	color:blue;
+}
+
+.text-link:hover {
+	color:cyan;
+	}
+
+	.text-link:active {
+
+		color:red;
+	}
+
+.delete-button {
+	cursor:pointer;
+}

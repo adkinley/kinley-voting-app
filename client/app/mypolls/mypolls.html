@@ -7,8 +7,8 @@
 <table class="table table-bordered" style="width:50%" >
 
 	<tr ng-repeat="poll in list">
-		<td style="border-right:none;" ng-click="loadPoll(poll.name)"><div class="text-left">{{poll.name}}</div></td>
-		<td style="border-left:none;"><div class="text-right"><i ng-click="delete(poll._id)" class="fa fa-trash-o "></i></div></td>
+		<td style="border-right:none;" ng-click="loadPoll(poll.name)"><div data-toggle="tooltip" title="Open Poll Results" class="text-link text-left">{{poll.name}}</div></td>
+		<td style="border-left:none;"><div class="text-right delete-button"><i ng-click="delete(poll._id)" class="fa fa-trash-o "></i></div></td>
 	
 </tr>
 

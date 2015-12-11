@@ -4,7 +4,7 @@ angular.module('kinleyVotingappApp').controller('MyPollsCtrl', function ($scope,
 
 
   $scope.user = Auth.getCurrentUser().name;
-  $scope.currentTitle = "";
+  $scope.currentTitle = '';
 	$scope.list = [];
   $scope.showGraph = false;
 
@@ -17,7 +17,7 @@ angular.module('kinleyVotingappApp').controller('MyPollsCtrl', function ($scope,
   });
 
   $scope.$watch('listUserPolls', function(newvalue, oldvalue) {
-    if (newvalue!=oldvalue) {
+    if (newvalue!==oldvalue) {
 
       $scope.userPollList = true;
       $scope.user = Auth.getCurrentUser().name;
@@ -65,7 +65,7 @@ angular.module('kinleyVotingappApp').controller('MyPollsCtrl', function ($scope,
        $scope.showGraph = true;
    
     var i =0;
-    while($scope.list[i].name!=title) {
+    while($scope.list[i].name!==title) {
       i++; 
     }
 

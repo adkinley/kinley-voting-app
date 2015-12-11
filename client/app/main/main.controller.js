@@ -16,8 +16,8 @@ angular.module('kinleyVotingappApp')
     $scope.title = $routeParams.title;
     $scope.user = $routeParams.username;
 
-    $scope.list = ["One", "Two", "Three"];
-    $scope.crazyValue = "Thomas";
+    $scope.list = ['One', 'Two', 'Three'];
+    $scope.crazyValue = 'Thomas';
 
     $scope.showGraph = false;
     $scope.isAsking = true;
@@ -25,7 +25,7 @@ angular.module('kinleyVotingappApp')
     // I am managing multiple routes come to this controller
     if ($routeParams.title && $routeParams.username) {
 
-      $http.get('/api/pollings/'+$scope.user+"/"+$scope.title).success(function(awesomeThings) {
+      $http.get('/api/pollings/'+$scope.user+'/'+$scope.title).success(function(awesomeThings) {
         $scope.awesomeThings = awesomeThings[0];
         $scope.list = $scope.awesomeThings.items;
       });
@@ -40,12 +40,13 @@ angular.module('kinleyVotingappApp')
     $scope.vote = function() {
 
       var pos = 0;
-      while (pos < $scope.list.length && $scope.list[pos].itemName!=$scope.radioValue)
+      while (pos < $scope.list.length && $scope.list[pos].itemName!==$scope.radioValue) {
         pos++;
+      }
       if (pos<$scope.list.length) {
         $scope.list[pos].votes++;
         $scope.awesomeThings.items = $scope.list;
-        $http.put("/api/pollings/"+$scope.awesomeThings._id,$scope.awesomeThings).success( function (data) {
+        $http.put('/api/pollings/'+$scope.awesomeThings._id,$scope.awesomeThings).success( function (data) {
 
           $scope.showGraph = true;
           $scope.isAsking = false;
@@ -81,12 +82,12 @@ angular.module('kinleyVotingappApp')
       $scope.createNewPoll = false;
       $scope.listUserPolls = true;
       $scope.showResult = !$scope.showResult;
+    };
 
-    }
   $scope.showCreatePolls = function() {
       $scope.createNewPoll = true;
       $scope.listUserPolls = false;
       $scope.showResult = !$scope.showResult;
-  }
+  };
 
   });

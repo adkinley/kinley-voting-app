@@ -6,15 +6,13 @@
   can survive as is
  **/
 angular.module('kinleyVotingappApp')
-  .controller('MainCtrl', function ($scope, $http, $routeParams, Auth) {
+  .controller('MainCtrl', function ($scope, $http, $routeParams, Auth,$modal) {
 
     $scope.awesomeThings = [];
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;
     $scope.newPoll = true;
-    $scope.title = $routeParams.title;
-    $scope.user = $routeParams.username;
 
     $scope.list = ['One', 'Two', 'Three'];
     $scope.crazyValue = 'Thomas';
@@ -22,20 +20,6 @@ angular.module('kinleyVotingappApp')
     $scope.showGraph = false;
     $scope.isAsking = true;
 
-    // I am managing multiple routes come to this controller
-    if ($routeParams.title && $routeParams.username) {
-
-      $http.get('/api/pollings/'+$scope.user+'/'+$scope.title).success(function(awesomeThings) {
-        $scope.awesomeThings = awesomeThings[0];
-        $scope.list = $scope.awesomeThings.items;
-      });
-    }
-
-  // add to the list of poll choices
-   $scope.addOption = function() {
-      $scope.count++;
-      $scope.list.push({placeholder: "New Option",name:"", pos:$scope.count});;
-   };
 
     //  Really sould be the navbar managing the signup
     $scope.signup = function() {
@@ -64,6 +48,72 @@ angular.module('kinleyVotingappApp')
   };
 
 
+
+  })
+.controller('PollResultCtrl', function ($scope, $http, $routeParams, Auth,$modal) {
+
+
+    $scope.awesomeThings = [];
+    $scope.isLoggedIn = Auth.isLoggedIn;
+    $scope.isAdmin = Auth.isAdmin;
+    $scope.getCurrentUser = Auth.getCurrentUser;
+    $scope.newPoll = true;
+    $scope.title = $routeParams.title;
+    $scope.user = $routeParams.username;
+
+    $scope.list = ['One', 'Two', 'Three'];
+    $scope.crazyValue = 'Thomas';
+
+    $scope.showGraph = false;
+    $scope.isAsking = true;
+    // I am managing multiple routes come to this controller
+      $http.get('/api/pollings/'+$scope.user+'/'+$scope.title).success(function(awesomeThings) {
+        $scope.awesomeThings = awesomeThings[0];
+
+        $scope.list = $scope.awesomeThings.items;
+  
+      });
+
+
+    $scope.optionAdded = false;
+
+
+$scope.openModal = function() {
+   $scope.modalInstance = $modal.open({
+      animation: $scope.animationsEnabled,
+      templateUrl: 'myModalInstance.html',
+      controller: 'ModalCtrl',
+      size: 'sm',
+      scope: $scope
+
+    });
+ };
+    //  Really sould be the navbar managing the signup
+    $scope.signup = function() {
+     $http.get('/signup');
+    };
+
+
+    // When the vote, update the results and show them the graph of the updated results 
+    $scope.vote = function() {
+
+      var pos = 0;
+      while (pos < $scope.list.length && $scope.list[pos].itemName!==$scope.radioValue) {
+        pos++;
+      }
+      if (pos<$scope.list.length) {
+        $scope.list[pos].votes++;
+        $scope.awesomeThings.items = $scope.list;
+        $http.put('/api/pollings/'+$scope.awesomeThings._id,$scope.awesomeThings).success( function (data) {
+
+          $scope.showGraph = true;
+          $scope.isAsking = false;
+          $scope.createGraph(data);
+      // switch to results screen!!!!!
+     });
+    }
+    
+  };
 // Setting up the data so angular-chart directive can do its work
  $scope.createGraph = function(data) {
       var length = data.items.length;
@@ -97,4 +147,18 @@ angular.module('kinleyVotingappApp')
       $scope.showResult = !$scope.showResult;
   };
 
-  });
+})
+.controller("ModalCtrl", function($scope) {
+    $scope.addOption =function(option) {
+      $scope.list.push({itemName:option, votes:0});;
+      $scope.optionAdded = true;
+      $scope.modalInstance.close('ok');
+  };
+
+$scope.closeModal = function() {
+
+  $scope.modalInstance.close('cancel');
+};
+
+}
+);

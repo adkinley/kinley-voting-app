@@ -9,7 +9,7 @@ angular.module('kinleyVotingappApp')
       })
       .when('/:username/:title', {
       	templateUrl: 'app/main/pollresult.html',
-     	controller: 'MainCtrl'
+     	controller: 'PollResultCtrl'
       })
       ;
   });

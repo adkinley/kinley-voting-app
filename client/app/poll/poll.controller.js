@@ -14,9 +14,9 @@ angular.module('kinleyVotingappApp').controller('PollCtrl', function ($scope, $h
   $scope.user = Auth.getCurrentUser().name;
 
   // add to the list of poll choices
-   $scope.addOption = function() {
-   		$scope.count++;
-   		$scope.values.push({placeholder: "New Option",name:"", pos:$scope.count});;
+   $scope.addOption = function() { // use a modal
+      $scope.count++;
+      $scope.values.push({placeholder: "New Option",name:"", pos:$scope.count});;
    };
    $scope.link = ""
 
@@ -44,7 +44,7 @@ $scope.submit = function() {
 
   $http.post("/api/pollings",polling).success( function (data) {
 
-    /** THIS WONT WORK ON HEROKU. NEEDS TO BE GENLIZED **/
+ 
   $scope.link =$location.protocol()+"://"+$location.host() +":"+$location.port()+"/" +Auth.getCurrentUser().name+"/"+$scope.question; 
 
   	$scope.question= '';

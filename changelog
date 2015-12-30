@@ -1,0 +1,97 @@
+diff --git a/Gruntfile.js b/Gruntfile.js
+index 6a16d55..731e318 100644
+--- a/Gruntfile.js
++++ b/Gruntfile.js
+@@ -246,7 +246,7 @@ module.exports = function (grunt) {
+     usemin: {
+       html: ['<%= yeoman.dist %>/public/{,*/}*.html'],
+       css: ['<%= yeoman.dist %>/public/{,*/}*.css'],
+-      js: ['<%= yeoman.dist %>/public/{,*/}*.js$'],
++      js: ['<%= yeoman.dist %>/public/{,*/}*.js'],
+       options: {
+         assetsDirs: [
+           '<%= yeoman.dist %>/public',
+@@ -291,7 +291,7 @@ module.exports = function (grunt) {
+         files: [{
+           expand: true,
+           cwd: '.tmp/concat',
+-          src: '**/*.js',
++          src: '**/*.js',
+           dest: '.tmp/concat'
+         }]
+       }
+@@ -470,7 +470,7 @@ module.exports = function (grunt) {
+           '<%= yeoman.client %>/index.html': [
+                [
+                  
+-                 '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js$',
++                 '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js',
+                  
+                  '!{.tmp,<%= yeoman.client %>}/app/app.js',               
+                  '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.spec.js',
+diff --git a/client/app/main/main.controller.js b/client/app/main/main.controller.js
+index f3aa4a4..1e687d3 100644
+--- a/client/app/main/main.controller.js
++++ b/client/app/main/main.controller.js
+@@ -6,7 +6,7 @@
+   can survive as is
+  **/
+ angular.module('kinleyVotingappApp')
+-  .controller('MainCtrl', function ($scope, $http, $routeParams, Auth) {
++  .controller('MainCtrl', function ($scope, $http, $routeParams, Auth,$modal) {
+ 
+     $scope.awesomeThings = [];
+     $scope.isLoggedIn = Auth.isLoggedIn;
+@@ -50,13 +50,13 @@ angular.module('kinleyVotingappApp')
+ 
+ 
+   })
+-.controller('PollResultCtrl', function ($scope, $http, $routeParams, Auth, $modal) {
++.controller('PollResultCtrl', function ($scope, $http, $routeParams, Auth,$modal) {
+ 
+ 
+     $scope.awesomeThings = [];
+     $scope.isLoggedIn = Auth.isLoggedIn;
+     $scope.isAdmin = Auth.isAdmin;
+-   $scope.getCurrentUser = Auth.getCurrentUser;
++    $scope.getCurrentUser = Auth.getCurrentUser;
+     $scope.newPoll = true;
+     $scope.title = $routeParams.title;
+     $scope.user = $routeParams.username;
+@@ -150,7 +150,7 @@ $scope.openModal = function() {
+ })
+ .controller("ModalCtrl", function($scope) {
+     $scope.addOption =function(option) {
+-      $scope.list.push({itemName:option, votes:0});
++      $scope.list.push({itemName:option, votes:0});;
+       $scope.optionAdded = true;
+       $scope.modalInstance.close('ok');
+   };
+diff --git a/client/index.html b/client/index.html
+index c622701..1242177 100644
+--- a/client/index.html
++++ b/client/index.html
+@@ -79,6 +79,23 @@
+         
+         <script src="app/app.js"></script>
+           <!-- injector:js -->
++          <script src="app/account/account.js"></script>
++          <script src="app/account/login/login.controller.js"></script>
++          <script src="app/account/settings/settings.controller.js"></script>
++          <script src="app/account/signup/signup.controller.js"></script>
++          <script src="app/admin/admin.controller.js"></script>
++          <script src="app/admin/admin.js"></script>
++          <script src="app/main/main.controller.js"></script>
++          <script src="app/main/main.js"></script>
++          <script src="app/mypolls/mypolls.controller.js"></script>
++          <script src="app/mypolls/mypolls.directive.js"></script>
++          <script src="app/poll/poll.controller.js"></script>
++          <script src="app/poll/poll.directive.js"></script>
++          <script src="components/auth/auth.service.js"></script>
++          <script src="components/auth/user.service.js"></script>
++          <script src="components/modal/modal.service.js"></script>
++          <script src="components/mongoose-error/mongoose-error.directive.js"></script>
++          <script src="components/navbar/navbar.controller.js"></script>
+           <!-- endinjector -->
+         <!-- endbuild -->
+ </body>

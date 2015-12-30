@@ -22,7 +22,9 @@
           <input style="margin-right:50px;" name="name" type="radio" ng-model="$parent.radioValue" value="{{choice.itemName}}" required/>{{choice.itemName}}</label></td>
         </tr>
       </table>
-      <input type="submit" ng-click="vote()" ng-disabled="!radioValue"></>
+        <button type="button" ng-show="isLoggedIn()" class="btn btn-default btn-info" ng-click="openModal()">Add Option</button>
+
+      <input type="submit" ng-click="vote()" ng-disabled="!radioValue"></input>
     </form>
 
     </div>

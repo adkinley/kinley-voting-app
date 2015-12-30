@@ -30,6 +30,13 @@ angular.module('kinleyVotingappApp')
         $scope.list = $scope.awesomeThings.items;
       });
     }
+
+  // add to the list of poll choices
+   $scope.addOption = function() {
+      $scope.count++;
+      $scope.list.push({placeholder: "New Option",name:"", pos:$scope.count});;
+   };
+
     //  Really sould be the navbar managing the signup
     $scope.signup = function() {
      $http.get('/signup');

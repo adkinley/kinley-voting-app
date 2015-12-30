@@ -6,7 +6,7 @@
   can survive as is
  **/
 angular.module('kinleyVotingappApp')
-  .controller('MainCtrl', function ($scope, $http, $routeParams, Auth,$modal) {
+  .controller('MainCtrl', function ($scope, $http, $routeParams, Auth) {
 
     $scope.awesomeThings = [];
     $scope.isLoggedIn = Auth.isLoggedIn;
@@ -50,13 +50,13 @@ angular.module('kinleyVotingappApp')
 
 
   })
-.controller('PollResultCtrl', function ($scope, $http, $routeParams, Auth,$modal) {
+.controller('PollResultCtrl', function ($scope, $http, $routeParams, Auth, $modal) {
 
 
     $scope.awesomeThings = [];
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
-    $scope.getCurrentUser = Auth.getCurrentUser;
+   $scope.getCurrentUser = Auth.getCurrentUser;
     $scope.newPoll = true;
     $scope.title = $routeParams.title;
     $scope.user = $routeParams.username;
@@ -150,7 +150,7 @@ $scope.openModal = function() {
 })
 .controller("ModalCtrl", function($scope) {
     $scope.addOption =function(option) {
-      $scope.list.push({itemName:option, votes:0});;
+      $scope.list.push({itemName:option, votes:0});
       $scope.optionAdded = true;
       $scope.modalInstance.close('ok');
   };
